@@ -1,0 +1,47 @@
+@import 'tailwindcss/base';
+@import 'tailwindcss/components';
+@import 'tailwindcss/utilities';
+
+*,
+*::before,
+*::after {
+  @apply box-border;
+}
+
+body {
+  @apply bg-gray-200 m-0;
+}
+
+.container .ql-editor {
+  width: 8.5in;
+  min-height: 11in;
+  @apply p-4 m-4 shadow-md bg-white;
+}
+
+.container .ql-container.ql-snow {
+  @apply border-none flex justify-center;
+}
+
+.container .ql-toolbar.ql-snow {
+  @apply flex justify-center sticky top-0 z-10 bg-gray-200 border-none shadow-md;
+}
+
+@page {
+  margin: 1in;
+}
+
+@media print {
+  body {
+    @apply bg-none;
+  }
+
+  .container .ql-editor {
+    width: 12in;
+    height: 17in;
+    @apply p-0 m-0 shadow-none self-start;
+  }
+
+  .container .ql-toolbar.ql-snow {
+    @apply hidden;
+  }
+}
