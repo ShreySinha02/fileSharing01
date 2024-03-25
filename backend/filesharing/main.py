@@ -10,9 +10,16 @@ from .databse import engine
 from fastapi.staticfiles import StaticFiles
 from fastapi.middleware.cors import CORSMiddleware
 import json
+import os
 models.Base.metadata.create_all(bind=engine)
 app=FastAPI()
-origins = ["http://localhost:5173"]
+frontend_host = os.getenv('FRONTEND_HOST', 'localhost')
+
+# Configure CORS middleware
+origins = [
+    "http://localhost:8081",  # Allow requests from the frontend service hostname
+]
+
 app.add_middleware(
     CORSMiddleware,
     allow_origins=origins,  # Update this to the frontend URL in production
@@ -48,7 +55,7 @@ document_clients = {}
 @app.websocket("/ws/{documentId}")
 async def websocket_endpoint(websocket: WebSocket,documentId:str,db:Session=Depends(get_db)):
     await websocket.accept()
-    # print("connected")
+    print("connected")
     # Add the new client to the list of connected clients
     if documentId not in document_clients:
         document_clients[documentId] = []

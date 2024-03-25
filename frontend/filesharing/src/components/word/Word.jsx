@@ -21,7 +21,7 @@ const TOOLBAR_OPTIONS = [
   ["clean"],
 ]
 
-const WS_URL = "ws://localhost:8000/ws";
+const WS_URL = "ws://backend/ws";
 
 function Word() {
   const { id: documentId } = useParams()
@@ -31,9 +31,9 @@ function Word() {
   
   console.log(loginStatus)
   console.log(username)
-
+  // http://0.0.0.0:81
   useEffect(() => {
-    const ws = new WebSocket(`ws://localhost:8000/ws/${documentId}`);
+    const ws = new WebSocket(`ws://0.0.0.0:81/ws/${documentId}`);
     setSocket(ws)
 
 

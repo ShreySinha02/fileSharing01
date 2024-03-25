@@ -13,7 +13,7 @@ function AllDoc() {
       // console.log(username)
       const response = await axios({
         method: 'get',
-        url: `http://127.0.0.1:8000/getdoc`,
+        url: `http://0.0.0.0:81/getdoc`,
         params: {
           username: username,
         },

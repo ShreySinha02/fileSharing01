@@ -28,7 +28,7 @@ function Doc({doc}) {
         try {
             res=await axios({
                 method:'post',
-                url: `http://127.0.0.1:8000/rename`,
+                url: `${import.meta.env.BASE_URL}rename`,
                 params:{
                     docId:id,   
                     filename:name

@@ -1,0 +1,46 @@
+version: '3'
+
+services:
+  postgresql:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_USER: test
+      POSTGRES_PASSWORD: 1234
+      POSTGRES_DB: fastapi
+    volumes:
+      - postgresql_data:/var/lib/postgresql/data
+    networks:
+      - custom_network
+
+  frontend:
+    build:
+      context: ./frontend/filesharing
+      dockerfile: Dockerfile
+    ports:
+      - "8081:8080"  # Host port 8080 mapped to container port 8080
+    networks:
+      - custom_network
+    depends_on:
+      - postgresql
+
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    ports:
+      - "81:80"  # Host port 80 mapped to container port 80
+    environment:
+      FRONTEND_HOST: frontend
+      DATABASE_URL: "postgresql+pg8000://test:1234@postgresql/fastapi"
+    networks:
+      - custom_network
+    depends_on:
+      - postgresql
+
+networks:
+  custom_network:
+    driver: bridge
+
+volumes:
+  postgresql_data:

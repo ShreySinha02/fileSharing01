@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router-dom';
 const Signup = () => {
   const navigate=useNavigate()
   const signup = (values) => {
-   const url=`http://127.0.0.1:8000/signup`
+   const url=`http://0.0.0.0:81/signup`
    const config = {
     headers: {
       'content-type': 'application/json',

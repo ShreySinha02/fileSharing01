@@ -22,7 +22,9 @@ def get_db():
 
 @router.post("/signup")
 def signUp(req:Userlog,db:Session=Depends(get_db)):
+    print(req)
     response=createUser(req,db)
+    print(response)
     return response
 
 

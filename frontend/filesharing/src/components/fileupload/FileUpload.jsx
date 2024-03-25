@@ -19,7 +19,7 @@ function FileUpload() {
       return;
     }
     event.preventDefault()
-    const url = 'http://127.0.0.1:8000/uploadfile';
+    const url = `http://0.0.0.0:81/uploadfile`;
     const formData = new FormData();
     formData.append('file', file);
     formData.append('fileName', file.name);
